@@ -25,7 +25,7 @@ resource "aws_instance" "bastion_1a" {
   ami               = "${var.amazon_inux}"
   availability_zone = "ap-northeast-1a"
   instance_type     = "t2.nano"
-  key_name          = "2dal-dev"
+  key_name          = "${var.dev_keyname}"
 
   vpc_security_group_ids = [
     "${aws_security_group.bastion.id}",

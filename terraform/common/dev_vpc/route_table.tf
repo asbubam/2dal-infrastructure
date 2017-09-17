@@ -27,8 +27,8 @@ resource "aws_route_table" "dev_private_1a" {
   vpc_id = "${aws_vpc.dev.id}"
 
   route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_nat_gateway.dev_1a.id}"
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = "${aws_nat_gateway.dev_1a.id}"
   }
 
   tags {
@@ -46,8 +46,8 @@ resource "aws_route_table" "dev_private_1c" {
   vpc_id = "${aws_vpc.dev.id}"
 
   route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_nat_gateway.dev_1c.id}"
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = "${aws_nat_gateway.dev_1c.id}"
   }
 
   tags {

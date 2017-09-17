@@ -19,6 +19,13 @@ resource "aws_default_network_acl" "dev_default" {
     to_port    = 0
   }
 
+  subnet_ids = [
+    "${aws_subnet.public_1a.id}",
+    "${aws_subnet.public_1c.id}",
+    "${aws_subnet.private_1a.id}",
+    "${aws_subnet.private_1c.id}"
+  ]
+
   tags {
     Name = "dev-default"
   }
