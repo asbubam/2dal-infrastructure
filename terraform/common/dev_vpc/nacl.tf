@@ -23,7 +23,7 @@ resource "aws_default_network_acl" "dev_default" {
     "${aws_subnet.public_1a.id}",
     "${aws_subnet.public_1c.id}",
     "${aws_subnet.private_1a.id}",
-    "${aws_subnet.private_1c.id}"
+    "${aws_subnet.private_1c.id}",
   ]
 
   tags {
