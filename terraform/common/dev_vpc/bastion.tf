@@ -1,4 +1,7 @@
 resource "aws_security_group" "bastion" {
+  name        = "bastion"
+  description = "open ssh port for bastion"
+
   vpc_id = "${aws_vpc.dev.id}"
 
   ingress {
@@ -13,6 +16,10 @@ resource "aws_security_group" "bastion" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags {
+    Name = "bastion"
   }
 }
 
