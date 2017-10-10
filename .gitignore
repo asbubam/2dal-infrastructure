@@ -3,5 +3,6 @@ iam/
 .envrc
 tmp/
 .terraform/
+.idea/
 terraform.tfstate
 terraform.tfstate.backup
