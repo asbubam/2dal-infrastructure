@@ -29,7 +29,7 @@ resource "aws_eip" "bastion_1a" {
 }
 
 resource "aws_instance" "bastion_1a" {
-  ami               = "${var.amazon_inux}"
+  ami               = "${var.amazon_linux}"
   availability_zone = "ap-northeast-1a"
   instance_type     = "t2.nano"
   key_name          = "${var.dev_keyname}"
