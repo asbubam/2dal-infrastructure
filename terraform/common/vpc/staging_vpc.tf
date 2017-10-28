@@ -2,14 +2,14 @@ module "vpc" {
   source = "../../modules/vpc"
 
   name = "staging"
-  cidr = "172.18.0.0/16"
+  cidr = "172.17.0.0/16"
 
   azs              = ["ap-northeast-1a", "ap-northeast-1c"]
-  public_subnets   = ["172.18.0.0/23", "172.18.2.0/23"]
-  private_subnets  = ["172.18.4.0/23", "172.18.6.0/23"]
-  database_subnets = ["172.18.8.0/23", "172.18.10.0/23"]
+  public_subnets   = ["172.17.1.0/24", "172.17.2.0/24"]
+  private_subnets  = ["172.17.101.0/24", "172.17.102.0/24"]
+  database_subnets = ["172.17.201.0/24", "172.17.202.0/24"]
 
   tags = {
-    "TerraformManaged"    = "true"
+    "TerraformManaged" = "true"
   }
 }
