@@ -13,3 +13,20 @@ module "vpc" {
     "TerraformManaged" = "true"
   }
 }
+
+module "bastion" {
+  source = "../../modules/bastion"
+
+  name   = "staging"
+  vpc_id = "${module.vpc.vpc_id}"
+
+  ami                 = "${data.aws_ami.amazon_linux.id}"
+  availability_zone   = "ap-northeast-1a"
+  subnet_id           = "${module.vpc.public_subnets_ids[0]}"
+  ingress_cidr_blocks = "${var.office_cidr_blocks}"
+  keypair_name        = "${var.keypair_name}"
+
+  tags = {
+    "TerraformManaged" = "true"
+  }
+}
