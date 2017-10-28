@@ -1,74 +1,74 @@
 # VPC
 output "vpc_id" {
-  description = "The ID of the VPC"
+  description = "VPC ID"
   value       = "${aws_vpc.this.id}"
 }
 
 output "vpc_cidr_block" {
-  description = "The CIDR block of the VPC"
+  description = "VPC에 할당한 CIDR block"
   value       = "${aws_vpc.this.cidr_block}"
 }
 
 output "default_security_group_id" {
-  description = "The ID of the security group created by default on VPC creation"
+  description = "VPC default Security Group ID"
   value       = "${aws_vpc.this.default_security_group_id}"
 }
 
 output "default_network_acl_id" {
-  description = "The ID of the default network ACL"
+  description = "VPC default network ACL ID"
   value       = "${aws_vpc.this.default_network_acl_id}"
 }
 
+# internet gateway
+output "igw_id" {
+  description = "Interget Gateway ID"
+  value       = "${aws_internet_gateway.this.id}"
+}
+
 # subnets
-output "private_subnets" {
-  description = "List of IDs of private subnets"
+output "private_subnets_ids" {
+  description = "Private Subnet ID 리스트"
   value       = ["${aws_subnet.private.*.id}"]
 }
 
-output "public_subnets" {
-  description = "List of IDs of public subnets"
+output "public_subnets_ids" {
+  description = "Public Subnet ID 리스트"
   value       = ["${aws_subnet.public.*.id}"]
 }
 
-output "database_subnets" {
-  description = "List of IDs of database subnets"
+output "database_subnets_ids" {
+  description = "Database Subnet ID 리스트"
   value       = ["${aws_subnet.database.*.id}"]
 }
 
-output "database_subnet_group" {
-  description = "ID of database subnet group"
+output "database_subnet_group_id" {
+  description = "Database Subnet Group ID"
   value       = "${aws_db_subnet_group.database.id}"
 }
 
 # route tables
 output "public_route_table_ids" {
-  description = "List of IDs of public route tables"
+  description = "Public Route Table ID 리스트"
   value       = ["${aws_route_table.public.*.id}"]
 }
 
 output "private_route_table_ids" {
-  description = "List of IDs of private route tables"
+  description = "Private Route Table ID 리스트"
   value       = ["${aws_route_table.private.*.id}"]
 }
 
 # NAT gateway
 output "nat_ids" {
-  description = "List of allocation ID of Elastic IPs created for AWS NAT Gateway"
+  description = "NAT Gateway에 할당된 EIP ID 리스트"
   value       = ["${aws_eip.nat.*.id}"]
 }
 
 output "nat_public_ips" {
-  description = "List of public Elastic IPs created for AWS NAT Gateway"
+  description = "NAT Gateway에 할당된 EIP 리스트"
   value       = ["${aws_eip.nat.*.public_ip}"]
 }
 
 output "natgw_ids" {
-  description = "List of NAT Gateway IDs"
+  description = "NAT Gateway ID 리스트"
   value       = ["${aws_nat_gateway.this.*.id}"]
-}
-
-# internet gateway
-output "igw_id" {
-  description = "The ID of the Internet Gateway"
-  value       = "${aws_internet_gateway.this.id}"
 }

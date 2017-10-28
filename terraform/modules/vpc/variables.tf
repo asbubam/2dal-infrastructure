@@ -1,40 +1,34 @@
 variable "name" {
-  description = "Name to be used on all the resources as identifier"
-  default     = ""
+  description = "모듈에서 정의하는 모든 리소스 이름의 prefix"
+  type        = "string"
 }
 
 variable "cidr" {
-  description = "The CIDR block for the VPC"
-  default     = ""
+  description = "VPC에 할당한 CIDR block"
+  type        = "string"
 }
 
 variable "public_subnets" {
-  description = "A list of public subnets inside the VPC"
-  default     = []
+  description = "Public Subnet IP 리스트"
+  type        = "list"
 }
 
 variable "private_subnets" {
-  description = "A list of private subnets inside the VPC"
-  default     = []
+  description = "Private Subnet IP 리스트"
+  type        = "list"
 }
 
 variable "database_subnets" {
+  description = "Database Subnet IP 리스트"
   type        = "list"
-  description = "A list of database subnets"
-  default     = []
-}
-
-variable "create_database_subnet_group" {
-  description = "Controls if database subnet group should be created"
-  default     = true
 }
 
 variable "azs" {
-  description = "A list of availability zones in the region"
-  default     = []
+  description = "사용할 availability zones 리스트"
+  type        = "list"
 }
 
 variable "tags" {
-  description = "A map of tags to add to all resources"
-  default     = {}
+  description = "모든 리소스에 추가되는 tag 맵"
+  type        = "map"
 }
