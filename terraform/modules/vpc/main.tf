@@ -40,7 +40,7 @@ resource "aws_default_network_acl" "dev_default" {
   subnet_ids = [
     "${aws_subnet.public.*.id}",
     "${aws_subnet.private.*.id}",
-    "${aws_subnet.database.*.id}"
+    "${aws_subnet.database.*.id}",
   ]
 
   tags = "${merge(var.tags, map("Name", format("%s-default", var.name)))}"
