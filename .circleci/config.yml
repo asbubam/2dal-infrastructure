@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Validate Terraform configurations
-          command: find . -type f -name "*.tf" -exec dirname {} \;|sort -u | while read m; do (terraform validate -check-variables=true "$m" && echo "√ $m") || exit 1 ; done
+          command: find . -type f -name "*.tf" -exec dirname {} \;|sort -u | while read m; do (terraform validate -check-variables=false "$m" && echo "√ $m") || exit 1 ; done
       - run:
           name: Check if Terraform configurations are properly formatted
           command: files=$(terraform fmt -write=false); if [ -n "$files" ]; then echo "$files"; echo -e "\nSome terraform files need be formatted, run 'terraform fmt' to fix"; exit 1; fi
