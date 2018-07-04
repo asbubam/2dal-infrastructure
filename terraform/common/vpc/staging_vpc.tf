@@ -1,13 +1,14 @@
+/*
 module "vpc" {
   source = "../../modules/vpc"
 
-  name = "dev"
-  cidr = "172.16.0.0/16"
+  name = "staging"
+  cidr = "172.17.0.0/16"
 
   azs              = ["ap-northeast-1a", "ap-northeast-1c"]
-  public_subnets   = ["172.16.1.0/24", "172.16.2.0/24"]
-  private_subnets  = ["172.16.101.0/24", "172.16.102.0/24"]
-  database_subnets = ["172.16.201.0/24", "172.16.202.0/24"]
+  public_subnets   = ["172.17.1.0/24", "172.17.2.0/24"]
+  private_subnets  = ["172.17.101.0/24", "172.17.102.0/24"]
+  database_subnets = ["172.17.201.0/24", "172.17.202.0/24"]
 
   tags = {
     "TerraformManaged" = "true"
@@ -17,7 +18,7 @@ module "vpc" {
 module "bastion" {
   source = "../../modules/bastion"
 
-  name   = "dev"
+  name   = "staging"
   vpc_id = "${module.vpc.vpc_id}"
 
   ami                 = "${data.aws_ami.amazon_linux.id}"
@@ -30,3 +31,4 @@ module "bastion" {
     "TerraformManaged" = "true"
   }
 }
+*/
