@@ -1,7 +1,7 @@
 module "vpc" {
   source = "../../modules/vpc"
 
-  name = "staging"
+  name = "dev"
   cidr = "172.17.0.0/16"
 
   azs              = ["ap-northeast-1a", "ap-northeast-1c"]
@@ -17,7 +17,7 @@ module "vpc" {
 module "bastion" {
   source = "../../modules/bastion"
 
-  name   = "staging"
+  name   = "dev"
   vpc_id = "${module.vpc.vpc_id}"
 
   ami                 = "${data.aws_ami.amazon_linux.id}"
