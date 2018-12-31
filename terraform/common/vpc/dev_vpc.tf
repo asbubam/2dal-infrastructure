@@ -1,5 +1,5 @@
 module "vpc" {
-  source = "../../modules/vpc"
+  source = "github.com/asbubam/2dal-infrastructure/terraform/modules/vpc"
 
   name = "dev"
   cidr = "172.16.0.0/16"
@@ -15,7 +15,7 @@ module "vpc" {
 }
 
 module "bastion" {
-  source = "../../modules/bastion"
+  source = "github.com/asbubam/2dal-infrastructure/terraform/modules/bastion"
 
   name   = "dev"
   vpc_id = "${module.vpc.vpc_id}"
