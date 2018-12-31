@@ -129,9 +129,10 @@ resource "aws_route_table" "private" {
   vpc_id = "${aws_vpc.this.id}"
 
   route {
-    cidr_block     = "0.0.0.0/0"
+    cidr_block = "0.0.0.0/0"
+
     #nat_gateway_id = "${aws_nat_gateway.this.*.id[count.index]}"
-    instance_id    = "${aws_instance.bastion.id}"
+    instance_id = "${aws_instance.bastion.id}"
   }
 
   tags = "${merge(var.tags, map("Name", format("%s-private-%s", var.name, var.azs[count.index])))}"
@@ -200,18 +201,19 @@ resource "aws_security_group" "ssh_from_bastion" {
 
 # bastion EC2
 resource "aws_instance" "bastion" {
-  ami                    = "${var.bastion_ami}"
-  instance_type          = "${var.bastion_instance_type}"
-  availability_zone      = "${var.bastion_availability_zone}"
-  subnet_id              = "${var.bastion_subnet_id}"
-  key_name               = "${var.bastion_keypair_name}"
+  ami               = "${var.bastion_ami}"
+  instance_type     = "${var.bastion_instance_type}"
+  availability_zone = "${var.bastion_availability_zone}"
+  subnet_id         = "${var.bastion_subnet_id}"
+  key_name          = "${var.bastion_keypair_name}"
+
   vpc_security_group_ids = [
-    "${aws_security_group.bastion.id}", 
-    "${aws_default_security_group.dev_default.id}"
+    "${aws_security_group.bastion.id}",
+    "${aws_default_security_group.dev_default.id}",
   ]
 
   associate_public_ip_address = true
-  source_dest_check = false
+  source_dest_check           = false
 
   tags = "${merge(var.tags, map("Name", format("%s-bastion", var.name)))}"
 }
