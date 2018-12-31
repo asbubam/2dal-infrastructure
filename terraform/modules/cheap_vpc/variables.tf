@@ -33,32 +33,32 @@ variable "tags" {
   type        = "map"
 }
 
-variable "ami" {
+variable "bastion_ami" {
   description = "bastion 생성에 사용할 AMI"
   type        = "string"
 }
 
-variable "instance_type" {
+variable "bastion_instance_type" {
   description = "bastion EC2 instance type"
   default     = "t2.nano"
 }
 
-variable "availability_zone" {
+variable "bastion_availability_zone" {
   description = "bastion EC2 instance availability zone"
   type        = "string"
 }
 
-variable "subnet_id" {
+variable "bastion_subnet_id" {
   description = "bastion EC2 instance Subnet ID"
   type        = "string"
 }
 
-variable "keypair_name" {
+variable "bastion_keypair_name" {
   description = "bastion이 사용할 keypair name"
   type        = "string"
 }
 
-variable "ingress_cidr_blocks" {
+variable "bastion_ingress_cidr_blocks" {
   description = "bastion SSH 접속을 허용할 CIDR block 리스트"
   type        = "list"
 }

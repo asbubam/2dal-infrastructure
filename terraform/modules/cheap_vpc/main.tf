@@ -169,7 +169,7 @@ resource "aws_security_group" "bastion" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = "${var.ingress_cidr_blocks}"
+    cidr_blocks = "${var.bastion_ingress_cidr_blocks}"
   }
 
   egress {
@@ -200,11 +200,11 @@ resource "aws_security_group" "ssh_from_bastion" {
 
 # bastion EC2
 resource "aws_instance" "bastion" {
-  ami                    = "${var.ami}"
-  instance_type          = "${var.instance_type}"
-  availability_zone      = "${var.availability_zone}"
-  subnet_id              = "${var.subnet_id}"
-  key_name               = "${var.keypair_name}"
+  ami                    = "${var.bastion_ami}"
+  instance_type          = "${var.bastion_instance_type}"
+  availability_zone      = "${var.bastion_availability_zone}"
+  subnet_id              = "${var.bastion_subnet_id}"
+  key_name               = "${var.bastion_keypair_name}"
   vpc_security_group_ids = [
     "${aws_security_group.bastion.id}", 
     "${aws_default_security_group.dev_default.id}"

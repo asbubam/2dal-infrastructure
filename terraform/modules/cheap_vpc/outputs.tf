@@ -4,6 +4,11 @@ output "vpc_id" {
   value       = "${aws_vpc.this.id}"
 }
 
+output "azs" {
+  description = "VPC가 사용할 availability zones 리스트"
+  value       = "${var.azs}"
+}
+
 output "vpc_cidr_block" {
   description = "VPC에 할당한 CIDR block"
   value       = "${aws_vpc.this.cidr_block}"

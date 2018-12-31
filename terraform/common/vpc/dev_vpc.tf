@@ -9,11 +9,11 @@ module "vpc" {
   private_subnets  = ["172.16.101.0/24", "172.16.102.0/24"]
   database_subnets = ["172.16.201.0/24", "172.16.202.0/24"]
 
-  ami                 = "${data.aws_ami.amazon_linux.id}"
-  availability_zone   = "ap-northeast-1a"
-  subnet_id           = "${module.vpc.public_subnets_ids[0]}"
-  ingress_cidr_blocks = "${var.office_cidr_blocks}"
-  keypair_name        = "${var.keypair_name}"
+  bastion_ami                 = "${data.aws_ami.amazon_linux_nat.id}"
+  bastion_availability_zone   = "${module.vpc.azs[0]}"
+  bastion_subnet_id           = "${module.vpc.public_subnets_ids[0]}"
+  bastion_ingress_cidr_blocks = "${var.office_cidr_blocks}"
+  bastion_keypair_name        = "${var.keypair_name}"
 
   tags = {
     "TerraformManaged" = "true"

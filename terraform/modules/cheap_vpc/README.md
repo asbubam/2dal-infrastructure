@@ -12,7 +12,7 @@ VPC와 Public, Private Subnet Set를 생성하는 모듈
 ## Usage
 ```
 module "vpc" {
-  source = "./modules/vpc"
+  source = "github.com/asbubam/2dal-infrastructure/terraform/modules/cheap_vpc"
 
   name = "dev"
   cidr = "172.16.0.0/16"
@@ -22,35 +22,41 @@ module "vpc" {
   private_subnets  = ["172.16.101.0/24", "172.16.102.0/24"]
   database_subnets = ["172.16.201.0/24", "172.16.202.0/24"]
 
+  bastion_ami                 = "ami-12345"
+  bastion_availability_zone   = "${module.vpc.azs[0]}"
+  bastion_subnet_id           = "${module.vpc.public_subnets_ids[0]}"
+  bastion_ingress_cidr_blocks = ["office ip CIDR"]
+  bastion_keypair_name        = "keypar-name"
+
   tags = {
     "TerraformManaged" = "true"
   }
 }
-
 ```
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| ami | bastion 생성에 사용할 AMI | string | - | yes |
-| availability_zone | bastion EC2 instance availability zone | string | - | yes |
 | azs | 사용할 availability zones 리스트 | list | - | yes |
+| bastion_ami | bastion 생성에 사용할 AMI | string | - | yes |
+| bastion_availability_zone | bastion EC2 instance availability zone | string | - | yes |
+| bastion_ingress_cidr_blocks | bastion SSH 접속을 허용할 CIDR block 리스트 | list | - | yes |
+| bastion_instance_type | bastion EC2 instance type | string | `t2.nano` | no |
+| bastion_keypair_name | bastion이 사용할 keypair name | string | - | yes |
+| bastion_subnet_id | bastion EC2 instance Subnet ID | string | - | yes |
 | cidr | VPC에 할당한 CIDR block | string | - | yes |
 | database_subnets | Database Subnet IP 리스트 | list | - | yes |
-| ingress_cidr_blocks | bastion SSH 접속을 허용할 CIDR block 리스트 | list | - | yes |
-| instance_type | bastion EC2 instance type | string | `t2.nano` | no |
-| keypair_name | bastion이 사용할 keypair name | string | - | yes |
 | name | 모듈에서 정의하는 모든 리소스 이름의 prefix | string | - | yes |
 | private_subnets | Private Subnet IP 리스트 | list | - | yes |
 | public_subnets | Public Subnet IP 리스트 | list | - | yes |
-| subnet_id | bastion EC2 instance Subnet ID | string | - | yes |
 | tags | 모든 리소스에 추가되는 tag 맵 | map | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| azs | VPC가 사용할 availability zones 리스트 |
 | bastion_instance_id | Bastion EC2 instance ID |
 | bastion_sg_id | Bastion에 접속하는 SG ID |
 | database_subnet_group_ids | Database Subnet Group ID 리스트 |
