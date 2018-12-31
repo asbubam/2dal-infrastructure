@@ -1,5 +1,5 @@
 module "vpc" {
-  source = "../../modules/cheap_vpc"
+  source = "github.com/asbubam/2dal-infrastructure/terraform/modules/cheap_vpc"
 
   name = "dev"
   cidr = "172.16.0.0/16"
