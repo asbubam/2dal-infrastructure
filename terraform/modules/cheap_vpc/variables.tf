@@ -62,3 +62,9 @@ variable "bastion_ingress_cidr_blocks" {
   description = "bastion SSH 접속을 허용할 CIDR block 리스트"
   type        = "list"
 }
+
+variable "bastion_instance_profile" {
+  description = "bastion 인스턴스에 할당할 instance profile"
+  type        = "string"
+  default     = ""
+}

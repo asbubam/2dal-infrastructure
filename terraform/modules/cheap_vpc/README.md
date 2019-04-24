@@ -1,5 +1,5 @@
 # VPC Module
-VPC와 Public, Private Subnet Set를 생성하는 모듈
+VPC와 Public, Private Subnet Set를 생성하고 Bastion/NAT 겸용 EC2 인스턴스를 생성한다.
 
 * 생성되는 리소스
     * VPC
@@ -41,7 +41,8 @@ module "vpc" {
 | azs | 사용할 availability zones 리스트 | list | - | yes |
 | bastion_ami | bastion 생성에 사용할 AMI | string | - | yes |
 | bastion_availability_zone | bastion EC2 instance availability zone | string | - | yes |
-| bastion_ingress_cidr_blocks | bastion SSH 접속을 허용할 CIDR block 리스트 | list | - | yes |
+| bastion_ingress_cidr_blocks | bastion 인스턴스에 할당할 instance profile | string | - | yes |
+| bastion_instance_profile | bastion SSH 접속을 허용할 CIDR block 리스트 | list | - | no |
 | bastion_instance_type | bastion EC2 instance type | string | `t2.nano` | no |
 | bastion_keypair_name | bastion이 사용할 keypair name | string | - | yes |
 | bastion_subnet_id | bastion EC2 instance Subnet ID | string | - | yes |

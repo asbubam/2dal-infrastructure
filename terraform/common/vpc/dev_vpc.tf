@@ -12,8 +12,8 @@ module "vpc" {
   bastion_ami                 = "${data.aws_ami.amazon_linux_nat.id}"
   bastion_availability_zone   = "${module.vpc.azs[0]}"
   bastion_subnet_id           = "${module.vpc.public_subnets_ids[0]}"
-  bastion_ingress_cidr_blocks = "${var.office_cidr_blocks}"
-  bastion_keypair_name        = "${var.keypair_name}"
+  bastion_ingress_cidr_blocks = ["0.0.0.0/0"]
+  bastion_keypair_name        = "2dal-dev"
 
   tags = {
     "TerraformManaged" = "true"

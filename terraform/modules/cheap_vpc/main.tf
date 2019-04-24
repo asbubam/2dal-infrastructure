@@ -215,6 +215,8 @@ resource "aws_instance" "bastion" {
   associate_public_ip_address = true
   source_dest_check           = false
 
+  iam_instance_profile = "${var.bastion_instance_profile}"
+
   tags = "${merge(var.tags, map("Name", format("%s-bastion", var.name)))}"
 }
 
