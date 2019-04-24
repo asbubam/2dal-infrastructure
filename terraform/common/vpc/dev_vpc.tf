@@ -18,18 +18,5 @@ module "vpc" {
 
   tags = {
     "TerraformManaged"  = "true"
-    "KubernetesCluster" = "2dal.k8s.local"
-  }
-
-  public_subnet_tags = {
-    "kubernetes.io/cluster/2dal.k8s.local" = "owned"
-    "kubernetes.io/role/elb"               = 1
-    "SubnetType"                           = "Utility"
-  }
-
-  private_subnet_tags = {
-    "kubernetes.io/cluster/2dal.k8s.local" = "owned"
-    "kubernetes.io/role/internal-elb"      = 1
-    "SubnetType"                           = "Private"
   }
 }
