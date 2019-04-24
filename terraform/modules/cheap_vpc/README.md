@@ -39,18 +39,20 @@ module "vpc" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | azs | 사용할 availability zones 리스트 | list | - | yes |
-| bastion_ami | bastion 생성에 사용할 AMI | string | - | yes |
-| bastion_availability_zone | bastion EC2 instance availability zone | string | - | yes |
-| bastion_ingress_cidr_blocks | bastion 인스턴스에 할당할 instance profile | string | - | yes |
-| bastion_instance_profile | bastion SSH 접속을 허용할 CIDR block 리스트 | list | - | no |
-| bastion_instance_type | bastion EC2 instance type | string | `t2.nano` | no |
-| bastion_keypair_name | bastion이 사용할 keypair name | string | - | yes |
-| bastion_subnet_id | bastion EC2 instance Subnet ID | string | - | yes |
+| bastion\_ami | bastion 생성에 사용할 AMI | string | - | yes |
+| bastion\_availability\_zone | bastion EC2 instance availability zone | string | - | yes |
+| bastion\_ingress\_cidr\_blocks | bastion SSH 접속을 허용할 CIDR block 리스트 | list | - | yes |
+| bastion\_instance\_profile | bastion 인스턴스에 할당할 instance profile | string | `` | no |
+| bastion\_instance\_type | bastion EC2 instance type | string | `t2.nano` | no |
+| bastion\_keypair\_name | bastion이 사용할 keypair name | string | - | yes |
+| bastion\_subnet\_id | bastion EC2 instance Subnet ID | string | - | yes |
 | cidr | VPC에 할당한 CIDR block | string | - | yes |
-| database_subnets | Database Subnet IP 리스트 | list | - | yes |
+| database\_subnets | Database Subnet IP 리스트 | list | - | yes |
 | name | 모듈에서 정의하는 모든 리소스 이름의 prefix | string | - | yes |
-| private_subnets | Private Subnet IP 리스트 | list | - | yes |
-| public_subnets | Public Subnet IP 리스트 | list | - | yes |
+| private\_subnet\_tags | private subnet에 추가되는 tag 맵 | map | `<map>` | no |
+| private\_subnets | Private Subnet IP 리스트 | list | - | yes |
+| public\_subnet\_tags | public subnet에 추가되는 tag 맵 | map | `<map>` | no |
+| public\_subnets | Public Subnet IP 리스트 | list | - | yes |
 | tags | 모든 리소스에 추가되는 tag 맵 | map | - | yes |
 
 ## Outputs

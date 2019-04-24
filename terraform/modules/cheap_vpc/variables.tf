@@ -33,6 +33,18 @@ variable "tags" {
   type        = "map"
 }
 
+variable "public_subnet_tags" {
+  description = "public subnet에 추가되는 tag 맵"
+  type        = "map"
+  default     = {}
+}
+
+variable "private_subnet_tags" {
+  description = "private subnet에 추가되는 tag 맵"
+  type        = "map"
+  default     = {}
+}
+
 variable "bastion_ami" {
   description = "bastion 생성에 사용할 AMI"
   type        = "string"
