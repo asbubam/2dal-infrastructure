@@ -214,6 +214,7 @@ resource "aws_instance" "bastion" {
 
   associate_public_ip_address = true
   source_dest_check           = false
+  disable_api_termination     = true
 
   iam_instance_profile = "${var.bastion_instance_profile}"
 
