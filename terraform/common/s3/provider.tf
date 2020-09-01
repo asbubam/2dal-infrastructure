@@ -1,3 +1,1 @@
-provider "aws" {
-  region = "ap-northeast-1"
-}
+../../common/provider.tf

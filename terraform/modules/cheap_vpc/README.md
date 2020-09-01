@@ -23,8 +23,8 @@ module "vpc" {
   database_subnets = ["172.16.201.0/24", "172.16.202.0/24"]
 
   bastion_ami                 = "ami-12345"
-  bastion_availability_zone   = "${module.vpc.azs[0]}"
-  bastion_subnet_id           = "${module.vpc.public_subnets_ids[0]}"
+  bastion_availability_zone   = module.vpc.azs[0]
+  bastion_subnet_id           = module.vpc.public_subnets_ids[0]
   bastion_ingress_cidr_blocks = ["office ip CIDR"]
   bastion_keypair_name        = "keypar-name"
 
