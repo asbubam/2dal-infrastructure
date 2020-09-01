@@ -12,13 +12,13 @@ jobs:
       - checkout
       - run:
           name: Validate Terraform configurations
-          command: find . -type f -name "*.tf" -exec dirname {} \;|sort -u | while read m; do (terraform init -input=false "$m" && terraform validate "$m" && echo "√ $m") || exit 1 ; done
+          command: find . -type f -name "*.tf" -exec dirname {} \; | grep -v '/modules/' | sort -u | while read m; do (echo "START> $m" && terraform init -input=false -backend=false "$m" && terraform validate "$m" && echo "√ $m") || exit 1 ; done
       - run:
           name: Check if Terraform configurations are properly formatted
           command: files=$(terraform fmt -write=false); if [ -n "$files" ]; then echo "$files"; echo -e "\nSome terraform files need be formatted, run 'terraform fmt' to fix"; exit 1; fi
       - run:
           name: Install tflint
-          command: curl -L -o /tmp/tflint.zip https://github.com/wata727/tflint/releases/download/v0.19.1/tflint_linux_amd64.zip && unzip /tmp/tflint.zip -d /usr/local/bin
+          command: apk update && apk add curl curl-dev && curl -L -o /tmp/tflint.zip https://github.com/wata727/tflint/releases/download/v0.19.1/tflint_linux_amd64.zip && unzip /tmp/tflint.zip -d /usr/local/bin
       - run:
           name: Check Terraform configurations with tflint
           command: tflint
