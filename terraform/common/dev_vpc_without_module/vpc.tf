@@ -4,7 +4,7 @@ resource "aws_vpc" "dev" {
   enable_dns_support   = true
   instance_tenancy     = "default"
 
-  tags {
+  tags = {
     Name = "dev"
   }
 }

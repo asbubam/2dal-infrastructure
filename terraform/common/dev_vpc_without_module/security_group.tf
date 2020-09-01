@@ -1,5 +1,5 @@
 resource "aws_default_security_group" "dev_default" {
-  vpc_id = "${aws_vpc.dev.id}"
+  vpc_id = aws_vpc.dev.id
 
   ingress {
     protocol  = -1
@@ -15,7 +15,7 @@ resource "aws_default_security_group" "dev_default" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     Name = "dev-default"
   }
 }
@@ -23,7 +23,7 @@ resource "aws_default_security_group" "dev_default" {
 resource "aws_security_group" "dev_docker_ephemeral_port_range" {
   name        = "dev_docker_ephemeral_port_range"
   description = "open docker ephemeral port range"
-  vpc_id      = "${aws_vpc.dev.id}"
+  vpc_id      = aws_vpc.dev.id
 
   ingress {
     protocol  = "tcp"
@@ -39,7 +39,7 @@ resource "aws_security_group" "dev_docker_ephemeral_port_range" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     Name = "dev-docker-ephemeral-port-range"
   }
 }
@@ -47,7 +47,7 @@ resource "aws_security_group" "dev_docker_ephemeral_port_range" {
 resource "aws_security_group" "elb_web" {
   name        = "elb_web"
   description = "open http, https port for elb web service"
-  vpc_id      = "${aws_vpc.dev.id}"
+  vpc_id      = aws_vpc.dev.id
 
   ingress {
     protocol    = "tcp"
@@ -72,7 +72,7 @@ resource "aws_security_group" "elb_web" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     Name = "elb-web"
   }
 }

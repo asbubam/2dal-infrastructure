@@ -2,7 +2,7 @@ resource "aws_security_group" "bastion" {
   name        = "bastion"
   description = "open ssh port for bastion"
 
-  vpc_id = "${aws_vpc.dev.id}"
+  vpc_id = aws_vpc.dev.id
 
   ingress {
     from_port   = 22
@@ -18,31 +18,31 @@ resource "aws_security_group" "bastion" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     Name = "bastion"
   }
 }
 
 resource "aws_eip" "bastion_1a" {
-  instance = "${aws_instance.bastion_1a.id}"
+  instance = aws_instance.bastion_1a.id
   vpc      = true
 }
 
 resource "aws_instance" "bastion_1a" {
-  ami               = "${var.amazon_linux}"
+  ami               = var.amazon_linux
   availability_zone = "ap-northeast-1a"
   instance_type     = "t2.nano"
-  key_name          = "${var.dev_keyname}"
+  key_name          = var.dev_keyname
 
   vpc_security_group_ids = [
-    "${aws_security_group.bastion.id}",
-    "${aws_default_security_group.dev_default.id}",
+    aws_security_group.bastion.id,
+    aws_default_security_group.dev_default.id,
   ]
 
-  subnet_id                   = "${aws_subnet.public_1a.id}"
+  subnet_id                   = aws_subnet.public_1a.id
   associate_public_ip_address = true
 
-  tags {
+  tags = {
     Name = "bastion-1a"
   }
 }
