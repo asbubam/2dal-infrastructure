@@ -1,10 +1,10 @@
 terraform {
-  required_version = ">= 0.13.1"
+  required_version = ">= 0.13.4"
 
   backend "s3" {
     bucket         = "2dal-infrastructure-tf-state"
-    key            = "common/vpc/dev-apne1/terraform.tfstate"
-    region         = "ap-northeast-1"
+    key            = "common/vpc/dev-apne2/terraform.tfstate"
+    region         = "ap-northeast-2"
     encrypt        = true
     dynamodb_table = "2dal-infrastructure-tf-lock"
   }
