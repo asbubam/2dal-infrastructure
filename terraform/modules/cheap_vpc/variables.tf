@@ -28,6 +28,17 @@ variable "azs" {
   type        = list(string)
 }
 
+variable "azs_alias" {
+  description = "availability zones alias"
+  type        = map(string)
+  default     = {
+    "ap-northeast-2a": "a",
+    "ap-northeast-2b": "b",
+    "ap-northeast-2c": "c",
+    "ap-northeast-2d": "d",
+  }
+}
+
 variable "tags" {
   description = "모든 리소스에 추가되는 tag 맵"
   type        = map(string)

@@ -1,1 +1,1 @@
-../../provider.tf
+../../../../terraform/provider.tf

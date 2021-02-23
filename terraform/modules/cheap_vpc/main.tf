@@ -76,7 +76,7 @@ resource "aws_subnet" "public" {
   cidr_block        = var.public_subnets[count.index]
   availability_zone = var.azs[count.index]
 
-  tags = merge(var.public_subnet_tags, var.tags, map("Name", format("%s-public-%s", var.name, var.azs[count.index])))
+  tags = merge(var.public_subnet_tags, var.tags, map("Name", format("%s-public-%s", var.name, var.azs_alias[var.azs[count.index]])))
 }
 
 # private subnet
@@ -87,7 +87,7 @@ resource "aws_subnet" "private" {
   cidr_block        = var.private_subnets[count.index]
   availability_zone = var.azs[count.index]
 
-  tags = merge(var.private_subnet_tags, var.tags, map("Name", format("%s-private-%s", var.name, var.azs[count.index])))
+  tags = merge(var.private_subnet_tags, var.tags, map("Name", format("%s-private-%s", var.name, var.azs_alias[var.azs[count.index]])))
 }
 
 # private database subnet
@@ -98,7 +98,7 @@ resource "aws_subnet" "database" {
   cidr_block        = var.database_subnets[count.index]
   availability_zone = var.azs[count.index]
 
-  tags = merge(var.tags, map("Name", format("%s-db-%s", var.name, var.azs[count.index])))
+  tags = merge(var.tags, map("Name", format("%s-db-%s", var.name, var.azs_alias[var.azs[count.index]])))
 }
 
 resource "aws_db_subnet_group" "database" {
@@ -136,7 +136,7 @@ resource "aws_route_table" "private" {
     instance_id = aws_instance.bastion.id
   }
 
-  tags = merge(var.tags, map("Name", format("%s-private-%s", var.name, var.azs[count.index])))
+  tags = merge(var.tags, map("Name", format("%s-private-%s", var.name, var.azs_alias[var.azs[count.index]])))
 }
 
 # route table association
@@ -172,6 +172,13 @@ resource "aws_security_group" "bastion" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = var.bastion_ingress_cidr_blocks
+  }
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = [var.cidr]
   }
 
   egress {
